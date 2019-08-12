@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run -e CI=true wxwwarren:react-app npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-southeast-1"
+  app: "react-app"
+  env: "ReactApp-env"
+  bucket_name: "elasticbeanstalk-ap-southeast-1-846749732458"
+  bucket_path: "react-app"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
